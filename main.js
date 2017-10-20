@@ -5,6 +5,17 @@ $(document).ready(function() {
   $("h1").fitText(1.2, { minFontSize: '20px', maxFontSize: '72px' });
   $("h2").fitText(1.2, { minFontSize: '14px', maxFontSize: '60px' });
 
+  // var interval = 1000;
+  //
+  //
+  //
+  //     function flicker()
+  //     {
+  //         $("#box").toggleClass('on');
+  //         setTimeout(flicker, interval);
+  //     }
+  //
+  //     flicker();
 
 });
 
