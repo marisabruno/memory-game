@@ -2,20 +2,42 @@ $(document).ready(function() {
   $(".light").addClass("animated pulse infinite");
   $(".light-vertical").addClass("animated pulse infinite");
   $(".sign").addClass("animated bounceIn");
-  $("h1").fitText(1.2, { minFontSize: '20px', maxFontSize: '72px' });
-  $("h2").fitText(1.2, { minFontSize: '14px', maxFontSize: '60px' });
 
-  // var interval = 1000;
-  //
-  //
-  //
-  //     function flicker()
-  //     {
-  //         $("#box").toggleClass('on');
-  //         setTimeout(flicker, interval);
-  //     }
-  //
-  //     flicker();
+// fitText
+  $("h1").fitText(1.2, { minFontSize: '20px', maxFontSize: '60px' });
+  $("h2").fitText(1.2, { minFontSize: '20px', maxFontSize: '48px' });
+  $("h3").fitText(1.2, { minFontSize: '14px', maxFontSize: '36px' });
+
+
+
+// Alternating Flicker Functions!
+  $(".light:nth-child(odd)").addClass("odd-light");
+  $(".light:nth-child(even)").addClass("even-light");
+
+  var interval = 500;
+
+  function flickerOdd()
+  {
+      $(".odd-light").toggleClass('light-off');
+      setTimeout(flickerOdd, interval);
+  }
+
+  flickerOdd();
+
+  function flickerEven()
+  {
+      $(".even-light").toggleClass('light-off');
+      setTimeout(flickerEven, interval);
+  }
+
+  function delayedFlicker(){
+    setTimeout(flickerEven,500);
+
+  }
+
+  delayedFlicker();
+
+
 
 });
 

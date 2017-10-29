@@ -1,0 +1,21 @@
+.white-button{
+  background-color: white;
+  color: $dark-pink;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  font-family: silom;
+  padding: 20px;
+  margin: 30px;
+}
+
+.big-button {
+  width: 40%;
+  font-size: 36px;
+
+}
+
+.side-button {
+  width: 100%;
+  font-size: 20px;
+}
