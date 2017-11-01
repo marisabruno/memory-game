@@ -9,6 +9,7 @@ body, .game-page {
   background: $green;
   border-radius: 10px;
   padding: 10px 20px;
+
 }
 
 .game-board-container {
@@ -61,8 +62,8 @@ body, .game-page {
   box-sizing: border-box;
 }
 
-.tile .back {
-  background-color: $dark-pink;
+.card .back {
+  background-color: $dark-green;
   width: 15%;
   height: 1.5em;
   float: left;
@@ -70,8 +71,25 @@ body, .game-page {
 	padding:0px;
 	font-size:64px;
   box-sizing: border-box;
+  border-radius: 10px;
 }
-.tile .front.blocked,
-.tile .back.blocked {
+
+.card .front {
+  background-color: $light-pink;
+  border: 3px solid $dark-green;
+  width: 15%;
+  height: 1.5em;
+  float: left;
+  margin: 20px 0px 0px 1.5%;
+	padding:0px;
+	font-size:64px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-size: contain;
+
+}
+
+.card .front.blocked,
+.card .back.blocked {
   pointer-events: none;
 }

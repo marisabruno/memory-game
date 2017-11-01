@@ -2,8 +2,10 @@
 // THE CARD GAME LOGIC**************************
 // //******************************************************************
 
-var MemoryGame= function (){
-  this.cards=[
+
+// Boards*****
+
+board1 =[
     {name:"umbrella",image:"images/icons/umbrella.png"},
     {name:"camera",image:"images/icons/camera.png"},
     {name:"orange",image:"images/icons/orange.png"},
@@ -29,9 +31,15 @@ var MemoryGame= function (){
     {name:"sunset",image:"images/icons/sunset.png"},
     {name:"sailboat",image:"images/icons/sailboat.png"}
   ];
+
+
+
+var MemoryGame= function (board){
+  this.cards= board;
   this.selectedCards = [];
   this.pairsClicked = 0;
   this.correctPairs = 0;
+
 };
 
 
@@ -57,37 +65,109 @@ MemoryGame.prototype.shuffleCards = function() {
   return this.cards;
 }
 
-
 };
+
+
+
+// Selecting a card*************
+
+
+
 
 
 // //******************************************************************
 // // HTML/CSS Interactions
 // //******************************************************************
 
-var memoryGame;
 
 $(document).ready(function(){
-  memoryGame = new MemoryGame();
+  var memoryGame = new MemoryGame(board1);
+
   var html = '';
 
-  memoryGame.cards.forEach(function(tile, index) {
-    var sanitizedName = tile.name.split(' ').join('_');
+  function render(board) {
+    board.forEach(function(card, index) {
+      var sanitizedName = card.name.split(' ').join('_');
 
-    html += '<div class= "tile" name="tile_' + sanitizedName + '">';
-    html += '<div class="back"';
-    html += '    name="' + tile.name + '">';
-    html += '</div>';
-    html += '<div class="front" ';
-    html += 'style="background: url(' + tile.image + '") no-repeat"';
-    html += '    name="'       + tile.name +  '">';
-    html += '</div>';
-    html += '</div>';
-  });
+      html += '<div class= "card" name="card_' + sanitizedName + '">';
+      html += '<div class="back"';
+      html += '    name="' + card.name + '">';
+      html += '</div>';
+      html += '<div class="front" ';
+      html += 'style="background: url(' + card.image + '") no-repeat"';
+      html += '    name="'       + card.name +  '">';
+      html += '</div>';
+      html += '</div>';
+    });
 
-  // Add all the divs to the HTML
-  document.getElementById('game-board').innerHTML = html;
+  }
+
+
+
+// Render Board 1
+
+  render(board1);
+
+
+
+// Add all the divs to the HTML
+document.getElementById('game-board').innerHTML = html;
+
+//hide front of cards
+$(".front").hide();
+
+// flip cards over after wrong match
+
+
+function flipBack(card1, card2)
+{
+    $(".flipped").children(".back").show();
+    $(".flipped").children(".front").hide();
+    // $(".card").removeClass(".flipped");
+    // setTimeout(flipBack, 2000);
+}
+
+
+// Select cards!!***********
+
+  $('.card').click(function(e){
+
+      $(this).addClass("flipped");
+      $(this).children(".back").hide();
+      $(this).children(".front").show();
+
+      if (memoryGame.selectedCards.length===0){
+        memoryGame.selectedCards.push($(this).children(".back").attr("name"));
+        console.log (memoryGame.selectedCards);
+      }
+      else if (memoryGame.selectedCards.length===1){
+        memoryGame.selectedCards.push($(this).children(".back").attr("name"));
+        console.log (memoryGame.selectedCards);
+        if (memoryGame.selectedCards[0]===memoryGame.selectedCards[1]){
+          console.log("it's a match!");
+          memoryGame.pairsClicked++;
+          memoryGame.correctPairs++;
+          memoryGame.selectedCards=[];
+          $(".card").removeClass(".flipped");
+        }
+        else if (memoryGame.selectedCards[0]!==memoryGame.selectedCards[1]){
+          console.log("not a match :( )");
+          memoryGame.pairsClicked++;
+          // console.log('[name="' + memoryGame.selectedCards[0] + '"]');
+          flipBack(memoryGame.selectedCards[0],memoryGame.selectedCards[1]);
+          memoryGame.selectedCards=[];
+        }
+      }
+
 });
+
+
+});
+
+
+
+
+
 
 
 
