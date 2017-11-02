@@ -75,7 +75,7 @@ body, .game-page {
 }
 
 .card .front {
-  background-color: $light-pink;
+  background-color: white;
   border: 3px solid $dark-green;
   width: 15%;
   height: 1.5em;
@@ -86,10 +86,11 @@ body, .game-page {
   box-sizing: border-box;
   border-radius: 10px;
   background-size: contain;
+  background-repeat: no-repeat;
 
 }
 
-.card .front.blocked,
-.card .back.blocked {
+.card .front.flipped,
+.card .back.flipped, .matched, .unclickable {
   pointer-events: none;
 }

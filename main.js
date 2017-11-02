@@ -3,39 +3,33 @@
 // //******************************************************************
 
 
-// Boards*****
-
-board1 =[
-    {name:"umbrella",image:"images/icons/umbrella.png"},
-    {name:"camera",image:"images/icons/camera.png"},
-    {name:"orange",image:"images/icons/orange.png"},
-    {name:"cocktail",image:"images/icons/cocktail.png"},
-    {name:"skateboard",image:"images/icons/skateboard.png"},
-    {name:"sunglasses",image:"images/icons/sunglasses.png"},
-    {name:"sangria",image:"images/icons/sangria.png"},
-    {name:"icecream",image:"images/icons/ice-cream.png"},
-    {name:"ship",image:"images/icons/ship.png"},
-    {name:"bikini",image:"images/icons/bikini.png"},
-    {name:"sunset",image:"images/icons/sunset.png"},
-    {name:"sailboat",image:"images/icons/sailboat.png"},
-    {name:"umbrella",image:"images/icons/umbrella.png"},
-    {name:"camera",image:"images/icons/camera.png"},
-    {name:"orange",image:"images/icons/orange.png"},
-    {name:"cocktail",image:"images/icons/cocktail.png"},
-    {name:"skateboard",image:"images/icons/skateboard.png"},
-    {name:"sunglasses",image:"images/icons/sunglasses.png"},
-    {name:"sangria",image:"images/icons/sangria.png"},
-    {name:"icecream",image:"images/icons/ice-cream.png"},
-    {name:"ship",image:"images/icons/ship.png"},
-    {name:"bikini",image:"images/icons/bikini.png"},
-    {name:"sunset",image:"images/icons/sunset.png"},
-    {name:"sailboat",image:"images/icons/sailboat.png"}
-  ];
-
-
-
-var MemoryGame= function (board){
-  this.cards= board;
+var MemoryGame= function (){
+  this.cards= [
+      {name:"umbrella",image:"images/icons/umbrella.png"},
+      {name:"camera",image:"images/icons/camera.png"},
+      {name:"orange",image:"images/icons/orange.png"},
+      {name:"cocktail",image:"images/icons/cocktail.png"},
+      {name:"skateboard",image:"images/icons/skateboard.png"},
+      {name:"sunglasses",image:"images/icons/sunglasses.png"},
+      {name:"sangria",image:"images/icons/sangria.png"},
+      {name:"icecream",image:"images/icons/ice-cream.png"},
+      {name:"ship",image:"images/icons/ship.png"},
+      {name:"bikini",image:"images/icons/bikini.png"},
+      {name:"sunset",image:"images/icons/sunset.png"},
+      {name:"sailboat",image:"images/icons/sailboat.png"},
+      {name:"umbrella",image:"images/icons/umbrella.png"},
+      {name:"camera",image:"images/icons/camera.png"},
+      {name:"orange",image:"images/icons/orange.png"},
+      {name:"cocktail",image:"images/icons/cocktail.png"},
+      {name:"skateboard",image:"images/icons/skateboard.png"},
+      {name:"sunglasses",image:"images/icons/sunglasses.png"},
+      {name:"sangria",image:"images/icons/sangria.png"},
+      {name:"icecream",image:"images/icons/ice-cream.png"},
+      {name:"ship",image:"images/icons/ship.png"},
+      {name:"bikini",image:"images/icons/bikini.png"},
+      {name:"sunset",image:"images/icons/sunset.png"},
+      {name:"sailboat",image:"images/icons/sailboat.png"}
+    ];
   this.selectedCards = [];
   this.pairsClicked = 0;
   this.correctPairs = 0;
@@ -43,10 +37,9 @@ var MemoryGame= function (board){
 };
 
 
+function shuffleCards() {
 
-MemoryGame.prototype.shuffleCards = function() {
-  {
-  var m = this.cards.length;
+  var m = memoryGame.cards.length;
   var t;
   var i;
 
@@ -57,19 +50,14 @@ MemoryGame.prototype.shuffleCards = function() {
     i = Math.floor(Math.random() * m--);
 
     // And swap it with the current element.
-    t = this.cards[m];
-    this.cards[m] = this.cards[i];
-    this.cards[i] = t;
+    t = memoryGame.cards[m];
+    memoryGame.cards[m] = memoryGame.cards[i];
+    memoryGame.cards[i] = t;
   }
 
-  return this.cards;
+  return memoryGame.cards;
+
 }
-
-};
-
-
-
-// Selecting a card*************
 
 
 
@@ -79,22 +67,26 @@ MemoryGame.prototype.shuffleCards = function() {
 // // HTML/CSS Interactions
 // //******************************************************************
 
+var memoryGame;
 
 $(document).ready(function(){
-  var memoryGame = new MemoryGame(board1);
+
+  memoryGame = new MemoryGame();
+
+  shuffleCards();
 
   var html = '';
 
-  function render(board) {
-    board.forEach(function(card, index) {
-      var sanitizedName = card.name.split(' ').join('_');
+  function render() {
+    memoryGame.cards.forEach(function(card, index) {
+      var sanitizedName =   card.name.split(' ').join('_');
 
       html += '<div class= "card" name="card_' + sanitizedName + '">';
       html += '<div class="back"';
       html += '    name="' + card.name + '">';
       html += '</div>';
       html += '<div class="front" ';
-      html += 'style="background: url(' + card.image + '") no-repeat"';
+      html += 'style="background-image: url(' + card.image + ')"';
       html += '    name="'       + card.name +  '">';
       html += '</div>';
       html += '</div>';
@@ -103,10 +95,9 @@ $(document).ready(function(){
   }
 
 
-
 // Render Board 1
 
-  render(board1);
+  render();
 
 
 
@@ -119,22 +110,25 @@ $(".front").hide();
 // flip cards over after wrong match
 
 
-function flipBack(card1, card2)
+
+function flipBack()
 {
-    $(".flipped").children(".back").show();
-    $(".flipped").children(".front").hide();
-    // $(".card").removeClass(".flipped");
-    // setTimeout(flipBack, 2000);
+    $(".flipped.back").show();
+    $(".flipped.front").hide();
+    $(".flipped").removeClass("flipped");
 }
+
 
 
 // Select cards!!***********
 
   $('.card').click(function(e){
 
-      $(this).addClass("flipped");
+      $(this).children(".back").addClass("flipped");
+      $(this).children(".front").addClass("flipped");
       $(this).children(".back").hide();
       $(this).children(".front").show();
+
 
       if (memoryGame.selectedCards.length===0){
         memoryGame.selectedCards.push($(this).children(".back").attr("name"));
@@ -148,18 +142,22 @@ function flipBack(card1, card2)
           memoryGame.pairsClicked++;
           memoryGame.correctPairs++;
           memoryGame.selectedCards=[];
-          $(".card").removeClass(".flipped");
+          $(".flipped").addClass("matched");
+          $(".flipped").removeClass("flipped");
+
+
         }
         else if (memoryGame.selectedCards[0]!==memoryGame.selectedCards[1]){
           console.log("not a match :( )");
           memoryGame.pairsClicked++;
-          // console.log('[name="' + memoryGame.selectedCards[0] + '"]');
-          flipBack(memoryGame.selectedCards[0],memoryGame.selectedCards[1]);
+          setTimeout(flipBack, 1000);
           memoryGame.selectedCards=[];
+
         }
       }
 
 });
+
 
 
 });
