@@ -1,3 +1,6 @@
+
+
+
 // //******************************************************************
 // THE CARD GAME LOGIC**************************
 // //******************************************************************
@@ -39,6 +42,10 @@ var MemoryGame= function (){
 
 function shuffleCards() {
 
+  console.log(memoryGame.cards);
+
+  console.log("shuffling cards");
+
   var m = memoryGame.cards.length;
   var t;
   var i;
@@ -54,6 +61,9 @@ function shuffleCards() {
     memoryGame.cards[m] = memoryGame.cards[i];
     memoryGame.cards[i] = t;
   }
+
+  console.log(memoryGame.cards);
+
 
   return memoryGame.cards;
 
@@ -73,14 +83,15 @@ $(document).ready(function(){
 
   memoryGame = new MemoryGame();
 
-  shuffleCards();
 
-  var html = '';
+
+var html = '';
 
   function render() {
+    shuffleCards();
+    html='';
     memoryGame.cards.forEach(function(card, index) {
       var sanitizedName =   card.name.split(' ').join('_');
-
       html += '<div class= "card" name="card_' + sanitizedName + '">';
       html += '<div class="back"';
       html += '    name="' + card.name + '">';
@@ -92,8 +103,13 @@ $(document).ready(function(){
       html += '</div>';
     });
 
+    console.log(html);
+
   }
 
+
+  //hide modal//
+  // $("#my-modal").hide();
 
 // Render Board 1
 
@@ -155,10 +171,29 @@ function flipBack()
 
         }
       }
+console.log(memoryGame.correctPairs);
+
+  if (memoryGame.correctPairs===12){
+    $('#my-modal').show();
+  }
 
 });
 
 
+
+
+
+$(".btn-primary").click(function(){
+    memoryGame.selectedCards = [];
+    memoryGame.pairsClicked = 0;
+    memoryGame.correctPairs = 0;
+    $(".card").children(".back").show();
+    $(".card").children(".front").hide();
+    $(".flipped").removeClass("flipped");
+    $(".matched").removeClass("matched");
+    $('#my-modal').hide();
+    render();
+});
 
 });
 
@@ -183,7 +218,7 @@ $(document).ready(function() {
   $(".light:nth-child(odd)").addClass("odd-light");
   $(".light:nth-child(even)").addClass("even-light");
 
-  var interval = 300;
+  var interval = 200;
 
   function flickerOdd()
   {
@@ -200,7 +235,7 @@ $(document).ready(function() {
   }
 
   function delayedFlicker(){
-    setTimeout(flickerEven,300);
+    setTimeout(flickerEven,200);
 
   }
 
@@ -214,6 +249,7 @@ $(document).ready(function() {
     $("h1").fitText(1.2, { minFontSize: '20px', maxFontSize: '60px' });
     $("h2").fitText(1.2, { minFontSize: '20px', maxFontSize: '48px' });
     $("h3").fitText(1.2, { minFontSize: '14px', maxFontSize: '36px' });
+    $("h5").fitText(1.2, { minFontSize: '24px', maxFontSize: '36px' });
 
 
 

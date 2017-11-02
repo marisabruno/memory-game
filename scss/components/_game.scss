@@ -1,5 +1,5 @@
 body, .game-page {
-  background-color: $light-pink;
+  background-color: $dark-pink;
   margin: 20px;
 }
 
@@ -29,11 +29,10 @@ body, .game-page {
   display: inline-block;
   background-image: url("../images/palm-tree.png");
   background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
+  background-size: cover;
   height: 50px;
   margin-top: 0px;
-  width: 30px;
+  width: 35px;
 }
 
 .edge-item{
@@ -43,7 +42,7 @@ body, .game-page {
 }
 
 .edge-content{
-  margin-top:50px;
+  margin-top:200px;
 }
 
 .action-buttons {
@@ -62,30 +61,38 @@ body, .game-page {
   box-sizing: border-box;
 }
 
-.card .back {
-  background-color: $dark-green;
+
+.card .back, .card .front {
   width: 15%;
-  height: 1.5em;
+  height: 1.4em;
   float: left;
-  margin: 20px 0px 0px 1.5%;
+  margin: 3% 1.6% 1.6% 0px;
 	padding:0px;
 	font-size:64px;
   box-sizing: border-box;
   border-radius: 10px;
 }
 
+.card .back {
+  background-color: $dark-green;
+}
+.back:hover{
+  border: 5px solid $light-pink;
+}
+
+.back:active, .front:active{
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+.card-umbrella{
+  background-color: $light-pink;
+}
+
 .card .front {
-  background-color: white;
-  border: 3px solid $dark-green;
-  width: 15%;
-  height: 1.5em;
-  float: left;
-  margin: 20px 0px 0px 1.5%;
-	padding:0px;
-	font-size:64px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  background-size: contain;
+  border: 5px solid $dark-pink;
+  background-size: cover;
   background-repeat: no-repeat;
 
 }
@@ -94,3 +101,265 @@ body, .game-page {
 .card .back.flipped, .matched, .unclickable {
   pointer-events: none;
 }
+
+
+#my-modal{
+  display: block;
+  h1{
+    text-align: center;
+    color: $dark-green;
+  }
+  p {
+    color: $dark-green;
+    text-align: center;
+  }
+
+  .btn-secondary{
+    background: $light-pink;
+    font-family: silom;
+    font-size: 16px;
+  }
+
+  .btn-primary{
+    background: $dark-pink;
+    font-family: silom;
+    font-size: 16px;
+  }
+}
+
+
+// MEDIA QUERIES************
+// ____________________Media Queries _______________
+
+
+
+@media(min-width:1150px)and (max-width:1350px){
+.card .back, .card .front{
+  height:1.2em;
+  margin-top: 6%;
+}
+}
+
+@media(min-width:1050px)and (max-width:1149px){
+.card .back, .card .front{
+  height:1.1em;
+  margin-top: 8%;
+}
+}
+
+@media(min-width:950px)and (max-width:1049px){
+.card .back, .card .front{
+  height:1.0em;
+  margin-top: 10%;
+}
+}
+
+@media(min-width:768px)and (max-width:950px){
+.card .back, .card .front{
+  width: 20%;
+  height:1.0em;
+  margin-top: 3%;
+  margin-left: 2%;
+  margin-right:2%;
+}
+}
+
+@media(min-width:551px)and (max-width:767px){
+.white-font{
+  position: relative;
+}
+.side-button {
+  width:50px;
+  height: 65px;
+  position:absolute;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  bottom:665px;
+}
+
+.start-pause-button{
+  right: 150px;
+}
+
+.music-button{
+  left: 150px;
+}
+.card .back, .card .front{
+  width: 20%;
+  height:1.0em;
+  margin-top: 3%;
+  margin-left: 3%;
+  margin-right:2%;
+}
+
+.edge-item{
+  font-size: 16px;
+}
+
+.mobile-game{
+  margin:0px;
+  padding:0px;
+}
+
+.edge-content{
+  margin-top: 0px;
+}
+}
+
+@media(min-width:651px)and (max-width:767px){
+  .white-font{
+    position: relative;
+  }
+  .side-button {
+    width:50px;
+    height: 65px;
+    position:absolute;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    bottom:665px;
+  }
+
+  .start-pause-button{
+    right: 150px;
+  }
+
+  .music-button{
+    left: 150px;
+  }
+
+.card .back, .card .front{
+  width: 20%;
+  height:1.0em;
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-right:2%;
+}
+
+.edge-item{
+  font-size: 16px;
+}
+
+.mobile-game{
+  margin:0px;
+  padding:0px;
+}
+
+.edge-content{
+  margin-top: 0px;
+}
+}
+
+
+@media(max-width:464px){
+  .white-font{
+    position: relative;
+  }
+  .side-button {
+    width:50px;
+    height: 65px;
+    position:absolute;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    bottom:665px;
+  }
+
+  .start-pause-button{
+    right: 100px;
+  }
+
+  .music-button{
+    left: 100px;
+  }
+
+.card .back, .card .front{
+  width: 21%;
+  height:1.0em;
+  margin-top: 5%;
+  margin-left: 3.2%;
+  margin-right:0%;
+}
+
+.edge-item{
+  font-size: 16px;
+}
+
+.mobile-game{
+  margin:0px;
+  padding:0px;
+}
+
+.edge-content{
+  margin-top: 0px;
+}
+
+.game-container{
+  width:100%;
+}
+
+#game-board{
+  padding:0px;
+
+}
+
+.container-fluid{
+  padding:0px;
+
+}
+}
+
+@media(min-width:465px)and (max-width:550px){
+  .white-font{
+    position: relative;
+  }
+  .side-button {
+    width:50px;
+    height: 65px;
+    position:absolute;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    bottom:665px;
+  }
+
+  .start-pause-button{
+    right: 100px;
+  }
+
+  .music-button{
+    left: 100px;
+  }
+
+  .card .back, .card .front{
+    width: 20%;
+    height:1.0em;
+    margin-top: 3%;
+    margin-left: 2.5%;
+    margin-right:2%;
+  }
+
+  .edge-item{
+    font-size: 16px;
+  }
+
+  .mobile-game{
+    margin:0px;
+    padding:0px;
+  }
+
+  .edge-content{
+    margin-top: 0px;
+  }
+
+  .game-container{
+    width:100%;
+  }
+
+  #game-board{
+    padding:0px;
+
+  }
+
+  .container-fluid{
+    padding:0px;
+
+  }
+  }

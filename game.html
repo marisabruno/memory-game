@@ -20,18 +20,41 @@
   </head>
   <body class="game-page">
 
+    <audio autoplay>
+      <source src="audio/ocean-drive.mp3" type="audio/mpeg">
+    </audio>
+
+
     <div class="wrapper container-fluid">
       <h1 class="white-font title animated bounceIn"><div class="game-palm-tree"></div> Miami Madness <div class="game-palm-tree"></div></h1>
 
-      <div class="row">
+      <div class="row mobile-game">
         <div class="col-sm-2 edge-content">
-          <h4 class="white-font edge-item">Level 1</h4><br>
+          <!-- <h4 class="white-font edge-item">Level 1</h4><br> -->
           <h4 class="white-font edge-item">Timer</h4>
           <h4 class="white-font edge-item">04:30</h4>
-          <div class="action-buttons">
+          <!-- <div class="action-buttons">
             <button class="white-button side-button edge-item">Pause Game</button>
             <button class="white-button side-button edge-item">End Game</button>
-          </div>
+          </div> -->
+        </div>
+
+        <div class="modal fade in" id="my-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title" id="exampleModalLabel">Miami Madness</h1>
+                </div>
+                <div class="modal-body">
+                  <p>Congrats! You won the game!</p>
+                </div>
+                <div class="modal-footer">
+                  <a href="homepage.html" class="btn btn-secondary" data-dismiss="modal">End Game</a>
+                  <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">End Game</button> -->
+                  <button type="button" class="btn btn-primary">Play Again!</button>
+                </div>
+              </div>
+            </div>
         </div>
 
         <div class="col-sm-8">
@@ -76,12 +99,12 @@
         </div>
 
         <div class="col-sm-2 edge-content">
-          <h4 class="white-font edge-item">Level 1</h4><br>
+          <!-- <h4 class="white-font edge-item">Level 1</h4><br>
           <h4 class="white-font edge-item">Timer</h4>
-          <h4 class="white-font edge-item">04:30</h4>
+          <h4 class="white-font edge-item">04:30</h4> -->
           <div class="action-buttons">
-            <button class="white-button side-button edge-item">Pause Game</button>
-            <button class="white-button side-button edge-item">End Game</button>
+            <button class="white-button side-button start-pause-button edge-item">Start Game</button>
+            <button class="white-button side-button music-button edge-item">Stop Music</button>
           </div>
         </div>
 

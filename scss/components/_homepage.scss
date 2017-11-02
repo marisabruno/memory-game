@@ -1,7 +1,8 @@
 body, .homepage{
-  background-color: $light-pink;
+  background-color: $dark-pink;
   margin: 20px;
 }
+
 
 
 // THE MOST ANNOYING SIGN IN THE WORLD
@@ -16,6 +17,8 @@ body, .homepage{
   background: $green;
   border-radius: 10px;
   padding: 10px 20px;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 .light {
@@ -109,6 +112,17 @@ padding: 2px;
 
 .homepage-button{
   margin: 20px auto;
+    h5{
+      color: $dark-pink;}
+}
+
+.homepage-button:hover{
+  border: 5px solid $green;
+}
+
+.homepage-button:active{
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 // ____________________Media Queries _______________
@@ -128,5 +142,8 @@ padding: 2px;
 @media (max-width:768px) {
   .palm-tree{display: none;}
   .instructions-title{margin-bottom: 0px;}
+  .homepage-button{
+    width:70%;
+  }
 
 }

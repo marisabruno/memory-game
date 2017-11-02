@@ -1,0 +1,52 @@
+
+        <div class="modal fade in" id="my-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title" id="exampleModalLabel">Miami Madness</h1>
+                </div>
+                <div class="modal-body">
+                  <p>Congrats! You won the game!</p>
+                </div>
+                <div class="modal-footer">
+                  <a href="homepage.html" class="btn btn-secondary" data-dismiss="modal">End Game</a>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">End Game</button>
+                  <button type="button" class="btn btn-primary">Play Again!</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+
+        .modal{
+          display: block;
+          h1{
+            text-align: center;
+            color: $dark-green;
+          }
+          p {
+            color: $dark-green;
+            text-align: center;
+          }
+
+          .btn-secondary{
+            background: $light-pink;
+            font-family: silom;
+            font-size: 16px;
+          }
+
+          .btn-primary{
+            background: $dark-pink;
+            font-family: silom;
+            font-size: 16px;
+          }
+        }
+
+
+        if (memoryGame.correctPairs===memoryGame.cards.length/2){
+          $('#my-modal').show();
+        }
+
+
+        //hide modal//
+        $("#my-modal").hide();
