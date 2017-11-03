@@ -40,35 +40,23 @@ var MemoryGame= function (){
 };
 
 
-function shuffleCards() {
-
-  console.log(memoryGame.cards);
-
+MemoryGame.prototype.shuffleCards=function(){
+  console.log(this.cards);
   console.log("shuffling cards");
-
-  var m = memoryGame.cards.length;
+  var m = this.cards.length;
   var t;
   var i;
-
   // While there remain elements to shuffle…
   while (m>0) {
-
     // Pick a remaining element…
     i = Math.floor(Math.random() * m--);
-
     // And swap it with the current element.
-    t = memoryGame.cards[m];
-    memoryGame.cards[m] = memoryGame.cards[i];
-    memoryGame.cards[i] = t;
+    t = this.cards[m];
+    this.cards[m] = this.cards[i];
+    this.cards[i] = t;
   }
-
-  console.log(memoryGame.cards);
-
-
-  return memoryGame.cards;
-
-}
-
+  return this.cards;
+};
 
 
 
@@ -77,18 +65,30 @@ function shuffleCards() {
 // // HTML/CSS Interactions
 // //******************************************************************
 
-var memoryGame;
 
 $(document).ready(function(){
 
-  memoryGame = new MemoryGame();
+
+  var memoryGame;
+  var html = '';
 
 
+// !!!****************// MAKE A NEW GAME!!!************************
 
-var html = '';
+  function makeNewGame(){
+    memoryGame = new MemoryGame();
+    render();
+    // Make sure the click function is on all new games
+    $('.card').click(clickCard);
+  }
 
-  function render() {
-    shuffleCards();
+makeNewGame();
+
+// !!!****************// Create HTML !!!************************
+
+  function createHTML() {
+    memoryGame.shuffleCards();
+    document.getElementById('game-board').innerHTML = html;
     html='';
     memoryGame.cards.forEach(function(card, index) {
       var sanitizedName =   card.name.split(' ').join('_');
@@ -103,28 +103,79 @@ var html = '';
       html += '</div>';
     });
 
-    console.log(html);
-
   }
 
+// !!!****************// Hide Modal !!!************************
 
+function hideModal(){
   //hide modal//
-  // $("#my-modal").hide();
+  $("#my-modal").hide();
+}
 
-// Render Board 1
+// !!!****************// render the HTML onto the page !!!************************
 
-  render();
+function render(){
+  hideModal();
+  // Create the HTML of the page
+  createHTML();
+  document.getElementById('game-board').innerHTML = html;
+  //hide front of cards
+  $(".front").hide();
+}
 
 
 
-// Add all the divs to the HTML
-document.getElementById('game-board').innerHTML = html;
+//Function that abstracts the selecting of the cards for use with the click fucntion --- DS
 
-//hide front of cards
-$(".front").hide();
+function clickCard()
+  {
 
-// flip cards over after wrong match
+      $(this).children(".back").addClass("flipped");
+      $(this).children(".front").addClass("flipped");
+      $(this).children(".back").hide();
+      $(this).children(".front").show();
 
+      // *************// Check how many cards have been clicked********
+
+        if (memoryGame.selectedCards.length===0){
+          memoryGame.selectedCards.push($(this).children(".back").attr("name"));
+          console.log (memoryGame.selectedCards);
+        }
+        else if (memoryGame.selectedCards.length===1){
+          memoryGame.selectedCards.push($(this).children(".back").attr("name"));
+          console.log (memoryGame.selectedCards);
+          checkForMatch();
+
+        }
+
+      checkForWin();
+
+}
+
+
+// *************// check for a match********
+
+function checkForMatch(){
+if (memoryGame.selectedCards[0]===memoryGame.selectedCards[1]){
+  console.log("it's a match!");
+  memoryGame.pairsClicked++;
+  memoryGame.correctPairs++;
+  memoryGame.selectedCards=[];
+  $(".flipped").addClass("matched");
+  $(".flipped").removeClass("flipped");
+
+
+}
+else if (memoryGame.selectedCards[0]!==memoryGame.selectedCards[1]){
+  console.log("not a match :( )");
+  memoryGame.pairsClicked++;
+  setTimeout(flipBack, 1000);
+  memoryGame.selectedCards=[];
+
+}
+}
+
+// *************// flip cards over after wrong match********
 
 
 function flipBack()
@@ -135,73 +186,31 @@ function flipBack()
 }
 
 
+// *************// Check to see if you've won********
 
-// Select cards!!***********
-
-  $('.card').click(function(e){
-
-      $(this).children(".back").addClass("flipped");
-      $(this).children(".front").addClass("flipped");
-      $(this).children(".back").hide();
-      $(this).children(".front").show();
-
-
-      if (memoryGame.selectedCards.length===0){
-        memoryGame.selectedCards.push($(this).children(".back").attr("name"));
-        console.log (memoryGame.selectedCards);
-      }
-      else if (memoryGame.selectedCards.length===1){
-        memoryGame.selectedCards.push($(this).children(".back").attr("name"));
-        console.log (memoryGame.selectedCards);
-        if (memoryGame.selectedCards[0]===memoryGame.selectedCards[1]){
-          console.log("it's a match!");
-          memoryGame.pairsClicked++;
-          memoryGame.correctPairs++;
-          memoryGame.selectedCards=[];
-          $(".flipped").addClass("matched");
-          $(".flipped").removeClass("flipped");
-
-
-        }
-        else if (memoryGame.selectedCards[0]!==memoryGame.selectedCards[1]){
-          console.log("not a match :( )");
-          memoryGame.pairsClicked++;
-          setTimeout(flipBack, 1000);
-          memoryGame.selectedCards=[];
-
-        }
-      }
-console.log(memoryGame.correctPairs);
-
-  if (memoryGame.correctPairs===12){
-    $('#my-modal').show();
-  }
-
-});
-
-
-
-
+function checkForWin(){
+if (memoryGame.correctPairs===12){
+  $('#my-modal').show();
+}
+}
 
 $(".btn-primary").click(function(){
-    memoryGame.selectedCards = [];
-    memoryGame.pairsClicked = 0;
-    memoryGame.correctPairs = 0;
-    $(".card").children(".back").show();
-    $(".card").children(".front").hide();
-    $(".flipped").removeClass("flipped");
-    $(".matched").removeClass("matched");
-    $('#my-modal').hide();
-    render();
+    makeNewGame();
 });
 
+// $(".btn-primary").click(function(){
+//     memoryGame.selectedCards = [];
+//     memoryGame.pairsClicked = 0;
+//     memoryGame.correctPairs = 0;
+//     $(".card").children(".back").show();
+//     $(".card").children(".front").hide();
+//     $(".flipped").removeClass("flipped");
+//     $(".matched").removeClass("matched");
+//     $('#my-modal').hide();
+//     render();
+// });
+
 });
-
-
-
-
-
-
 
 
 
