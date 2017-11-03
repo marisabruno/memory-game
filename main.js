@@ -160,12 +160,13 @@ function clickCard()
 function checkForMatch(){
 if (memoryGame.selectedCards[0]===memoryGame.selectedCards[1]){
   console.log("it's a match!");
+  var audio = $(".match-sound")[0];
+  audio.play();
   memoryGame.pairsClicked++;
   memoryGame.correctPairs++;
   memoryGame.selectedCards=[];
   $(".flipped").addClass("matched");
   $(".flipped").removeClass("flipped");
-
 
 }
 else if (memoryGame.selectedCards[0]!==memoryGame.selectedCards[1]){
@@ -211,6 +212,8 @@ $(".btn-primary").click(function(){
 
 $(".start-pause-button").click(function(){
   console.log("clicked!");
+  var audio = $(".start-game")[0];
+  audio.play();
   var time = 60;
   var timeCounter;
 
