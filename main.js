@@ -129,6 +129,8 @@ function render(){
 
 function clickCard()
   {
+      var audio = $(".card-click")[0];
+      audio.play();
 
       $(this).children(".back").addClass("flipped");
       $(this).children(".front").addClass("flipped");
@@ -169,7 +171,7 @@ if (memoryGame.selectedCards[0]===memoryGame.selectedCards[1]){
 else if (memoryGame.selectedCards[0]!==memoryGame.selectedCards[1]){
   console.log("not a match :( )");
   memoryGame.pairsClicked++;
-  setTimeout(flipBack, 1000);
+  setTimeout(flipBack, 500);
   memoryGame.selectedCards=[];
 
 }
@@ -186,30 +188,47 @@ function flipBack()
 }
 
 
+
+
 // *************// Check to see if you've won********
 
 function checkForWin(){
 if (memoryGame.correctPairs===12){
+  $(".modal-body").html("<p>Congratulations!! You won the game!</p>");
   $('#my-modal').show();
+  clearInterval(timeCounter);
 }
 }
+
+// *************//Play a new game!********
 
 $(".btn-primary").click(function(){
     makeNewGame();
+    $("#timer").html("60 s");
 });
 
-// $(".btn-primary").click(function(){
-//     memoryGame.selectedCards = [];
-//     memoryGame.pairsClicked = 0;
-//     memoryGame.correctPairs = 0;
-//     $(".card").children(".back").show();
-//     $(".card").children(".front").hide();
-//     $(".flipped").removeClass("flipped");
-//     $(".matched").removeClass("matched");
-//     $('#my-modal').hide();
-//     render();
-// });
+// *************//Timer!!********
 
+$(".start-pause-button").click(function(){
+  console.log("clicked!");
+  var time = 60;
+  var timeCounter;
+
+  timeCounter = setInterval(function(){
+    time -= 1;
+    console.log(time);
+    $("#timer").html(time+" s");
+
+    if(time <= 0){
+      clearInterval(timeCounter);
+      $(".modal-body").html("<p>Oh no!  You ran out of time! Better luck next time!</p>");
+      $("#my-modal").show();
+      return;
+    }
+
+  },1000);
+
+  });
 });
 
 
@@ -250,7 +269,13 @@ $(document).ready(function() {
 
   delayedFlicker();
 
+// sound effect for the homepage!
 
+$(".homepage-button").click(function(){
+  var audio = $(".card-click")[0];
+  audio.play();
+  console.log("clicked");
+});
 
   // fitText
 
