@@ -133,28 +133,28 @@ body, .game-page {
 
 
 
-@media(min-width:1150px)and (max-width:1350px){
+@media only screen and (min-width:1150px)and (max-width:1350px){
 .card .back, .card .front{
   height:1.2em;
   margin-top: 6%;
 }
 }
 
-@media(min-width:1050px)and (max-width:1149px){
+@media only screen and (min-width:1050px)and (max-width:1149px){
 .card .back, .card .front{
   height:1.1em;
   margin-top: 8%;
 }
 }
 
-@media(min-width:950px)and (max-width:1049px){
+@media only screen and (min-width:950px)and (max-width:1049px){
 .card .back, .card .front{
   height:1.0em;
   margin-top: 10%;
 }
 }
 
-@media(min-width:768px)and (max-width:950px){
+@media only screen and (min-width:768px)and (max-width:950px){
 .card .back, .card .front{
   width: 20%;
   height:1.0em;
@@ -164,7 +164,7 @@ body, .game-page {
 }
 }
 
-@media(min-width:551px)and (max-width:767px){
+@media only screen and (min-width:551px)and (max-width:767px){
 .white-font{
   position: relative;
 }
@@ -206,7 +206,7 @@ body, .game-page {
 }
 }
 
-@media(min-width:651px)and (max-width:767px){
+@media only screen and (min-width:651px)and (max-width:767px){
   .white-font{
     position: relative;
   }
@@ -250,7 +250,7 @@ body, .game-page {
 }
 
 
-@media(max-width:464px){
+@media only screen and (max-width:464px){
   .white-font{
     position: relative;
   }
@@ -307,7 +307,7 @@ body, .game-page {
 }
 }
 
-@media(min-width:465px)and (max-width:550px){
+@media only screen and (min-width:465px)and (max-width:550px){
   .white-font{
     position: relative;
   }
